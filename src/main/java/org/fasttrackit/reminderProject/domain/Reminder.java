@@ -8,12 +8,16 @@ import java.util.Date;
 public class Reminder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
     private String title;
 
     private Date remindDate;
+
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "notificationId")
+    private Notification notification;
 
 
     public long getId() {
@@ -32,9 +36,20 @@ public class Reminder {
         this.title = title;
     }
 
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
+    }
+
     public Date getRemindDate() {
         return remindDate;
     }
+
+    public void setRemindDate(Date remind_Date) {
+        this.remindDate = remind_Date; }
 
     @Override
     public String toString() {
@@ -42,12 +57,20 @@ public class Reminder {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", remindDate=" + remindDate +
+                ", notification=" + notification +
                 '}';
     }
 
-    public void setRemindDate(Date remind_Date) {
-        this.remindDate = remind_Date;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reminder reminder = (Reminder) o;
+        return id == reminder.id;
+    }
 
-
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
     }
 }

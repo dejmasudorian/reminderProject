@@ -11,9 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/reminder")
+@RequestMapping("/reminders")
 @CrossOrigin
 public class ReminderController {
 
@@ -25,6 +26,12 @@ public class ReminderController {
     }
 
 
+    @GetMapping()
+    public ResponseEntity<List<Reminder>> getAllReminders(){
+        List<Reminder> response = service.getAllReminders();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Reminder> getReminder(@PathVariable("id") long id) throws ResourceNotFoundException {
         Reminder response = service.getReminder(id);
@@ -33,7 +40,7 @@ public class ReminderController {
 
     @PostMapping
     public ResponseEntity<Reminder> createReminder(@RequestBody @Valid CreateReminderRequest request) {
-        Reminder response = service.createProduct(request);
+        Reminder response = service.createReminder(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

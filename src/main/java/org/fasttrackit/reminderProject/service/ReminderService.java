@@ -1,6 +1,7 @@
 package org.fasttrackit.reminderProject.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.fasttrackit.reminderProject.domain.Notification;
 import org.fasttrackit.reminderProject.domain.Reminder;
 import org.fasttrackit.reminderProject.exception.ResourceNotFoundException;
 import org.fasttrackit.reminderProject.repository.ReminderRepository;
@@ -21,20 +22,23 @@ public class ReminderService {
             LoggerFactory.getLogger(ReminderService.class);
 
     private final ReminderRepository repository;
+    private final NotificationService notificationService;
     private final ObjectMapper objectMapper;
 
 
     @Autowired
-    public ReminderService(ReminderRepository repository, ObjectMapper objectMapper) {
+    public ReminderService(ReminderRepository repository, NotificationService notificationService, ObjectMapper objectMapper) {
         this.repository = repository;
+        this.notificationService = notificationService;
         this.objectMapper = objectMapper;
     }
 
-    public Reminder createProduct(CreateReminderRequest request) {
+    public Reminder createReminder(CreateReminderRequest request) {
         LOGGER.info("Creating reminder {}", request);
         Reminder reminder = objectMapper.convertValue(request, Reminder.class);
         return repository.save(reminder);
     }
+
 
     public Reminder getReminder(long id) throws ResourceNotFoundException {
         LOGGER.info("Retrieving reminder {}", id);

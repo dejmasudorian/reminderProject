@@ -6,11 +6,18 @@ import java.util.Date;
 
 public class CreateNotificationRequest {
 
+    private long reminderId;
     private LevelOfImportance levelOfImportance;
     private String details;
     private Date reminderCreatedDate;
-    private String createdBy;
 
+    public long getReminderId() {
+        return reminderId;
+    }
+
+    public void setReminderId(long reminderId) {
+        this.reminderId = reminderId;
+    }
 
     public LevelOfImportance getLevelOfImportance() {
         return levelOfImportance;
@@ -36,22 +43,16 @@ public class CreateNotificationRequest {
         this.reminderCreatedDate = reminderCreatedDate;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
 
 
     @Override
     public String toString() {
         return "CreateNotificationRequest{" +
-                "levelOfImportance=" + levelOfImportance +
+                "reminderId=" + reminderId +
+                ", levelOfImportance=" + levelOfImportance +
                 ", details='" + details + '\'' +
                 ", reminderCreatedDate=" + reminderCreatedDate +
-                ", createdBy='" + createdBy + '\'' +
                 '}';
     }
 }

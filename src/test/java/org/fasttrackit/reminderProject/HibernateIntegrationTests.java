@@ -45,22 +45,4 @@ public class HibernateIntegrationTests {
         assertThat(event.getDescription(), is(eventRequest.getDescription()));
     }
 
-
-    @Test
-    public void testCreateNotification_whenValidRequest_thenReturnNotification() throws ResourceNotFoundException {
-        Reminder reminder = reminderSteps.createReminder();
-
-        CreateEventRequest eventRequest = new CreateEventRequest();
-        eventRequest.setReminderId(reminder.getId());
-        eventRequest.setDescription("Event Details");
-
-        Event event = eventService.createEvent(eventRequest);
-
-        assertThat(event, notNullValue());
-        assertThat(event.getId(), greaterThan(0L));
-
-        assertThat(event.getReminder(), notNullValue());
-        assertThat(event.getReminder().getId(), is(reminder.getId()));
-        assertThat(event.getDescription(), is(eventRequest.getDescription()));
-    }
 }

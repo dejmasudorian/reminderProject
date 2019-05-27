@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/events")
@@ -34,9 +36,21 @@ public class EventController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping()
+    public ResponseEntity<List<Event>> getAllEvents(){
+        List<Event> response = service.getAllEvents();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteReminder(@PathVariable("id") long id) {
         service.deleteEvent(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity options(HttpServletResponse response) {
+        response.setHeader("Allow", "HEAD,GET,PUT,OPTIONS,POST,DELETE");
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package org.fasttrackit.reminderProject.domain;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity
@@ -12,7 +13,7 @@ public class Notification {
 
     private String details;
     private Date reminderCreatedDate;
-    private LevelOfImportance importance;
+    private boolean importance;
 
 
     public long getId() {
@@ -39,11 +40,12 @@ public class Notification {
         this.reminderCreatedDate = reminderCreatedDate;
     }
 
-    public LevelOfImportance getImportance() {
+
+    public boolean isImportance() {
         return importance;
     }
 
-    public void setImportance(LevelOfImportance importance) {
+    public void setImportance(boolean importance) {
         this.importance = importance;
     }
 

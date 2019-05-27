@@ -1,6 +1,5 @@
 package org.fasttrackit.reminderProject.Steps;
 
-import org.fasttrackit.reminderProject.domain.LevelOfImportance;
 import org.fasttrackit.reminderProject.domain.Notification;
 import org.fasttrackit.reminderProject.exception.ResourceNotFoundException;
 import org.fasttrackit.reminderProject.service.NotificationService;
@@ -25,7 +24,7 @@ public class NotificationSteps {
         Date date = calendar.getTime();
 
         request.setDetails("Multe");
-        request.setLevelOfImportance(LevelOfImportance.LOW);
+        request.setImportance(true);
         request.setReminderCreatedDate(date);
 
         return service.createNotification(request);

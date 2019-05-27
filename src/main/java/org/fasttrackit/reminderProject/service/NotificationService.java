@@ -35,6 +35,11 @@ public class NotificationService {
         return repository.save(notification);
     }
 
+    public List<Notification> getAllNotifications()
+    {LOGGER.info("Retrieving all notifications:");
+        return repository.findAll();
+    }
+
     public Notification getNotification(long id) throws ResourceNotFoundException {
         LOGGER.info("Retrieving notification {}", id);
         return repository.findById(id)

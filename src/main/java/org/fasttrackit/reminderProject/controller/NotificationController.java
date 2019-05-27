@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/notifications")
@@ -33,6 +35,13 @@ public class NotificationController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping()
+    public ResponseEntity<List<Notification>> getAllNotifications(){
+        List<Notification> response = service.getAllNotifications();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
     @PostMapping
     public ResponseEntity<Notification> createNotification(@RequestBody @Valid CreateNotificationRequest request) {
         Notification response = service.createNotification(request);
@@ -51,5 +60,11 @@ public class NotificationController {
     public ResponseEntity deleteNotification(@PathVariable("id") long id) {
         service.deleteNotification(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity options(HttpServletResponse response) {
+        response.setHeader("Allow", "HEAD,GET,PUT,OPTIONS,POST,DELETE");
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

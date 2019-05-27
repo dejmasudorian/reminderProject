@@ -9,5 +9,5 @@ spring:
     generate-ddl: true
   datasource:
     url: jdbc:mysql://localhost:3306/reminder1?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: reminder_admin2
-    password: admin
+    username: reminder
+    password: reminder

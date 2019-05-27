@@ -1,31 +1,15 @@
 package org.fasttrackit.reminderProject.transfer.Notification;
 
-import org.fasttrackit.reminderProject.domain.LevelOfImportance;
-
+import java.util.Arrays;
 import java.util.Date;
 
 public class CreateNotificationRequest {
 
-    private long reminderId;
-    private LevelOfImportance levelOfImportance;
+
     private String details;
     private Date reminderCreatedDate;
+    private boolean importance;
 
-    public long getReminderId() {
-        return reminderId;
-    }
-
-    public void setReminderId(long reminderId) {
-        this.reminderId = reminderId;
-    }
-
-    public LevelOfImportance getLevelOfImportance() {
-        return levelOfImportance;
-    }
-
-    public void setLevelOfImportance(LevelOfImportance levelOfImportance) {
-        this.levelOfImportance = levelOfImportance;
-    }
 
     public String getDetails() {
         return details;
@@ -43,16 +27,20 @@ public class CreateNotificationRequest {
         this.reminderCreatedDate = reminderCreatedDate;
     }
 
+    public boolean isImportance() {
+        return importance;
+    }
 
-
+    public void setImportance(boolean importance) {
+        this.importance = importance;
+    }
 
     @Override
     public String toString() {
         return "CreateNotificationRequest{" +
-                "reminderId=" + reminderId +
-                ", levelOfImportance=" + levelOfImportance +
-                ", details='" + details + '\'' +
+                "details='" + details + '\'' +
                 ", reminderCreatedDate=" + reminderCreatedDate +
+                ", importance=" + importance +
                 '}';
     }
 }

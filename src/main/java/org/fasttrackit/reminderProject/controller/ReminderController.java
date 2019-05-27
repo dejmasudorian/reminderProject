@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class ReminderController {
 
     @GetMapping()
     public ResponseEntity<List<Reminder>> getAllReminders(){
-        List<Reminder> response = service.getAllReminders();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        List<Reminder> reminders = service.getAllReminders();
+        return new ResponseEntity<>(reminders, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -56,5 +57,11 @@ public class ReminderController {
     public ResponseEntity deleteReminder(@PathVariable("id") long id) {
         service.deleteReminder(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity options(HttpServletResponse response) {
+        response.setHeader("Allow", "HEAD,GET,PUT,OPTIONS,POST,DELETE");
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

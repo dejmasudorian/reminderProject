@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class EventService {
@@ -25,6 +28,7 @@ public class EventService {
         this.reminderService = reminderService;
     }
 
+    @Transactional
     public Event createEvent(CreateEventRequest request) throws ResourceNotFoundException {
         LOGGER.info("Creating event {}", request);
         Reminder reminder = reminderService.getReminder(request.getReminderId());
@@ -47,5 +51,10 @@ public class EventService {
         LOGGER.info("Deleting event {}", id);
         eventRepository.deleteById(id);
         LOGGER.info("Deleted event {}", id);
+    }
+
+    public List<Event> getAllEvents()
+    {LOGGER.info("Retrieving all events:");
+        return eventRepository.findAll();
     }
 }

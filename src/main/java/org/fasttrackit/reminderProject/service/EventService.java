@@ -45,7 +45,7 @@ public class EventService {
         return eventRepository.findById(id)
                 // Optional and lambda expression
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Reminder " + id + " not found"));}
+                        "Events " + id + " not found"));}
 
     public void deleteEvent(long id) {
         LOGGER.info("Deleting event {}", id);

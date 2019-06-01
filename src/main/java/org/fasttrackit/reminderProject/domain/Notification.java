@@ -1,7 +1,6 @@
 package org.fasttrackit.reminderProject.domain;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Date;
 
 @Entity

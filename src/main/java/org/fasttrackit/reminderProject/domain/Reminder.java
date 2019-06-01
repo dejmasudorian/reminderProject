@@ -1,9 +1,11 @@
 package org.fasttrackit.reminderProject.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.Date;
 
-
+@JsonSerialize
 @Entity
 public class Reminder {
 
@@ -14,10 +16,6 @@ public class Reminder {
     private String title;
 
     private Date remindDate;
-
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "notificationId")
-    private Notification notification;
 
 
     public long getId() {
@@ -36,14 +34,6 @@ public class Reminder {
         this.title = title;
     }
 
-    public Notification getNotification() {
-        return notification;
-    }
-
-    public void setNotification(Notification notification) {
-        this.notification = notification;
-    }
-
     public Date getRemindDate() {
         return remindDate;
     }
@@ -57,7 +47,6 @@ public class Reminder {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", remindDate=" + remindDate +
-                ", notification=" + notification +
                 '}';
     }
 

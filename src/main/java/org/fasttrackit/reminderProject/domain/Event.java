@@ -1,6 +1,9 @@
 package org.fasttrackit.reminderProject.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
+
 
 @Entity
 public class Event {
@@ -10,6 +13,7 @@ public class Event {
     private long id;
     private String description;
 
+    @JsonSerialize
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reminder_id")
     private Reminder reminder;

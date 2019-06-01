@@ -1,6 +1,7 @@
 package org.fasttrackit.reminderProject.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.fasttrackit.reminderProject.domain.Notification;
 import org.fasttrackit.reminderProject.domain.Reminder;
 import org.fasttrackit.reminderProject.exception.ResourceNotFoundException;
@@ -35,6 +36,7 @@ public class ReminderService {
 
     public Reminder createReminder(CreateReminderRequest request) {
         LOGGER.info("Creating reminder {}", request);
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         Reminder reminder = objectMapper.convertValue(request, Reminder.class);
         return repository.save(reminder);
     }

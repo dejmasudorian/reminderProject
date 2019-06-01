@@ -2,9 +2,8 @@ package org.fasttrackit.reminderProject.transfer.Event;
 
 import java.util.Date;
 
-public class CreateEventRequest {
+public class EventRequest {
 
-    private long reminderId;
     private String name;
     private String location;
     private String description;
@@ -26,22 +25,6 @@ public class CreateEventRequest {
         this.location = location;
     }
 
-    public Date getDateEvent() {
-        return dateEvent;
-    }
-
-    public void setDateEvent(Date dateEvent) {
-        this.dateEvent = dateEvent;
-    }
-
-    public long getReminderId() {
-        return reminderId;
-    }
-
-    public void setReminderId(long reminderId) {
-        this.reminderId = reminderId;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -50,11 +33,18 @@ public class CreateEventRequest {
         this.description = description;
     }
 
+    public Date getDateEvent() {
+        return dateEvent;
+    }
+
+    public void setDateEvent(Date dateEvent) {
+        this.dateEvent = dateEvent;
+    }
+
     @Override
     public String toString() {
-        return "CreateEventRequest{" +
-                "reminderId=" + reminderId +
-                ", name='" + name + '\'' +
+        return "EventRequest{" +
+                "name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", dateEvent=" + dateEvent +

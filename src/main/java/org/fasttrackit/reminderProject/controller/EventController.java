@@ -2,7 +2,7 @@ package org.fasttrackit.reminderProject.controller;
 import org.fasttrackit.reminderProject.domain.Event;
 import org.fasttrackit.reminderProject.exception.ResourceNotFoundException;
 import org.fasttrackit.reminderProject.service.EventService;
-import org.fasttrackit.reminderProject.transfer.Event.CreateEventRequest;
+import org.fasttrackit.reminderProject.transfer.Event.EventRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +25,17 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody @Valid CreateEventRequest request) throws ResourceNotFoundException {
+    public ResponseEntity<Event> createEvent(@RequestBody @Valid EventRequest request) {
         Event response = service.createEvent(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+/*
+    @PostMapping
+    public ResponseEntity<Event> addEventToReminder(@RequestBody @Valid CreateEventRequest request) throws ResourceNotFoundException {
+        Event response = service.addEventToReminder(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+    */
 
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEvent(@PathVariable("id") long id) throws ResourceNotFoundException {

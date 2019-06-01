@@ -1,10 +1,14 @@
 package org.fasttrackit.reminderProject.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.fasttrackit.reminderProject.domain.Event;
 import org.fasttrackit.reminderProject.domain.Reminder;
 import org.fasttrackit.reminderProject.exception.ResourceNotFoundException;
 import org.fasttrackit.reminderProject.repository.EventRepository;
 import org.fasttrackit.reminderProject.transfer.Event.CreateEventRequest;
+import org.fasttrackit.reminderProject.transfer.Event.EventRequest;
+import org.fasttrackit.reminderProject.transfer.Reminder.CreateReminderRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +25,33 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final ReminderService reminderService;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public EventService(EventRepository eventRepository, ReminderService reviewRepository, ReminderService reminderService) {
+    public EventService(EventRepository eventRepository, ReminderService reviewRepository, ReminderService reminderService, ObjectMapper objectMapper) {
         this.eventRepository = eventRepository;
         this.reminderService = reminderService;
+        this.objectMapper = objectMapper;
     }
 
     @Transactional
-    public Event createEvent(CreateEventRequest request) throws ResourceNotFoundException {
-        LOGGER.info("Creating event {}", request);
+    public Event addEventToReminder(CreateEventRequest request) throws ResourceNotFoundException {
+        LOGGER.info("Adding event to reminder{}", request);
         Reminder reminder = reminderService.getReminder(request.getReminderId());
 
         Event event = new Event();
+        event.setName(request.getName());
+        event.setLocation(request.getLocation());
         event.setDescription(request.getDescription());
+        event.setDateEvent(request.getDateEvent());
         event.setReminder(reminder);
 
+        return eventRepository.save(event);
+    }
+
+    public Event createEvent(EventRequest request) {
+        LOGGER.info("Creating event {}", request);
+        Event event = objectMapper.convertValue(request, Event.class);
         return eventRepository.save(event);
     }
 

@@ -12,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -26,16 +30,22 @@ public class HibernateIntegrationTests {
 
     @Autowired
     private ReminderSteps reminderSteps;
-
+/*
     @Test
     public void testCreateEvent_whenValidRequest_thenReturnEvent() throws ResourceNotFoundException {
         Reminder reminder = reminderSteps.createReminder();
 
         CreateEventRequest eventRequest = new CreateEventRequest();
         eventRequest.setReminderId(reminder.getId());
-        eventRequest.setDescription("Event Details");
+        eventRequest.setName("Meeting at 12:00");
+        eventRequest.setLocation("Restaurant Walker");
+        eventRequest.setDescription("Talk with co-workers about business plans.");
 
-        Event event = eventService.createEvent(eventRequest);
+        Calendar calendar = new GregorianCalendar(2019, 9 , 19);
+        Date date = calendar.getTime();
+        eventRequest.setDateEvent(date);
+
+        Event event = eventService.addEventToReminder(eventRequest);
 
         assertThat(event, notNullValue());
         assertThat(event.getId(), greaterThan(0L));
@@ -44,5 +54,5 @@ public class HibernateIntegrationTests {
         assertThat(event.getReminder().getId(), is(reminder.getId()));
         assertThat(event.getDescription(), is(eventRequest.getDescription()));
     }
-
+*/
 }

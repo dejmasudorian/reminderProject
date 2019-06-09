@@ -30,7 +30,7 @@ public class HibernateIntegrationTests {
 
     @Autowired
     private ReminderSteps reminderSteps;
-/*
+
     @Test
     public void testCreateEvent_whenValidRequest_thenReturnEvent() throws ResourceNotFoundException {
         Reminder reminder = reminderSteps.createReminder();
@@ -41,7 +41,7 @@ public class HibernateIntegrationTests {
         eventRequest.setLocation("Restaurant Walker");
         eventRequest.setDescription("Talk with co-workers about business plans.");
 
-        Calendar calendar = new GregorianCalendar(2019, 9 , 19);
+        Calendar calendar = new GregorianCalendar(2019, Calendar.FEBRUARY , 19);
         Date date = calendar.getTime();
         eventRequest.setDateEvent(date);
 
@@ -54,5 +54,5 @@ public class HibernateIntegrationTests {
         assertThat(event.getReminder().getId(), is(reminder.getId()));
         assertThat(event.getDescription(), is(eventRequest.getDescription()));
     }
-*/
+
 }

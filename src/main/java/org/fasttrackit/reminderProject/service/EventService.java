@@ -11,6 +11,7 @@ import org.fasttrackit.reminderProject.transfer.Event.EventRequest;
 import org.fasttrackit.reminderProject.transfer.Reminder.CreateReminderRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,5 +72,14 @@ public class EventService {
     public List<Event> getAllEvents()
     {LOGGER.info("Retrieving all events:");
         return eventRepository.findAll();
+    }
+
+    public Event updateEvent(long id, EventRequest request) throws ResourceNotFoundException {
+        LOGGER.info("Updating event {}, {}", id, request);
+        Event event = getEvent(id);
+
+        BeanUtils.copyProperties(request, event);
+
+        return eventRepository.save(event);
     }
 }
